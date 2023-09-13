@@ -24,6 +24,8 @@ import {$convertToMarkdownString, TRANSFORMERS} from "@lexical/markdown";
 import {IMAGE, ImageNode} from "@/nodes/image.ts";
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
 import {MessageType} from "@/message.ts";
+import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
+import LexicalSlashMenuPlugin from "@/components/LexicalSlashMenuPlugin.vue";
 
 const config = {
   editable: true,
@@ -42,13 +44,14 @@ const config = {
     HashtagNode,
     EmojiNode,
     ImageNode,
+    DividerNode,
   ],
 }
 const onError = (error) => {
   console.error(error)
 }
 
-const T = [IMAGE, EMOJI, ...TRANSFORMERS]
+const T = [DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
 console.log("T", T);
 
 const URL_MATCHER = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
@@ -127,13 +130,70 @@ const onChange = (editorState, editor, tags: Set<string>) => {
         <LexicalCheckListPlugin/>
         <LexicalTabIndentationPlugin/>
         <LexicalReloadPlugin :transformers="T"/>
+        <LexicalSlashMenuPlugin />
       </div>
     </div>
   </LexicalComposer>
 </template>
 
 <style lang="scss">
+@import 'github-markdown-css/github-markdown-light.css';
 #app{
   background: #FFF;
+}
+
+.dropdown-menu {
+  position: absolute;
+  width: 240px;
+  padding: 8px 0;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.14);
+  z-index: 3000;
+
+  .dropdown-menu-item {
+    height: 24px;
+    font-size: 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin: 0 8px;
+    padding: 8px 8px;
+    gap: 12px;
+
+    .dropdown-menu-item-subtitle {
+      color: #858a90;
+    }
+
+    .img-boxing {
+      width: 20px;
+      height: 20px;
+      background: #e9e9e9;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    img {
+      //width: 14px;
+      //height: 14px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &, * {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #666666
+    }
+  }
+
+  .dropdown-menu-item-active {
+    background: #e9e9e9;
+  }
 }
 </style>

@@ -105,7 +105,9 @@ export class ImageNode extends TextNode {
         const img = document.createElement('img');
         img.setAttribute('src', this.__src);
         img.setAttribute('alt', this.__altText);
-        img.setAttribute('title', this.__title);
+        if (this.__title !== undefined) {
+            img.setAttribute('title', this.__title);
+        }
         span.append(img)
         return span;
     }

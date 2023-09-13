@@ -19,6 +19,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "allowJs": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"

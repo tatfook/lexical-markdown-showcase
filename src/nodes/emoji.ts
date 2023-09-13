@@ -25,7 +25,6 @@ export class EmojiNode extends TextNode {
   createDOM(): HTMLElement {
     const dom = document.createElement('span');
     const inner = document.createElement('span');
-    // @ts-expect-error
     inner.innerHTML = EmojiData[this.__text];
     inner.className = 'emoji-inner';
     dom.appendChild(inner);

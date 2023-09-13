@@ -28,6 +28,7 @@ onMounted(() => {
         && (data.type === 'init' || data.type === 'update')
         && data.source === 'parent'
     ) {
+      // @ts-expect-error
       const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
       editor.dispatchCommand(CLEAR_EDITOR_COMMAND, {
         tag: 'reload'
