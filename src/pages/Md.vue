@@ -26,12 +26,10 @@ import {IMAGE, ImageNode} from "@/nodes/image.ts";
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
 import {MessageType} from "@/message.ts";
 import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
-import {onBeforeMount, onMounted, provide, ref} from "vue";
+import {ref} from "vue";
 import {useRoute} from "vue-router";
 
 const route = useRoute()
-
-console.log("route.query.is_dev", route.query.is_dev);
 const isDev = ref(route.query.is_dev !== 'false')
 
 const config = {
@@ -89,18 +87,6 @@ const MATCHERS = [
   },
 ]
 
-const listens: ((msg: any) => void)[] = []
-provide('listens', listens)
-
-onBeforeMount(() => {
-  console.log('onBeforeMount')
-  // @ts-ignore
-  window.onListenMessage = (listen) => {
-    console.log('onListenMessage')
-    listens.push(listen)
-  }
-})
-
 const onChange = (editorState, editor, tags: Set<string>) => {
   if (tags.has('reload') || tags.has('history-merge')) {
     return
@@ -114,7 +100,7 @@ const onChange = (editorState, editor, tags: Set<string>) => {
     text: markdown,
     source: 'child'
   }
-  listens.forEach(listen => listen(message))
+  window.parent.postMessage(message, '*')
   console.log("markdown", markdown);
 }
 </script>
