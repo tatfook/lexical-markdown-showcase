@@ -2,7 +2,7 @@
 
 import {onMounted} from "vue";
 import {useEditor} from "lexical-vue";
-import {$convertFromMarkdownString} from "@lexical/markdown";
+import {$convertFromMarkdownString, $convertToMarkdownString} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
 import {CLEAR_EDITOR_COMMAND} from "lexical";
 import {isMessageType, MessageType} from "@/message.ts";
@@ -29,13 +29,18 @@ onMounted(() => {
         && (data.type === 'init' || data.type === 'update')
         && data.source === 'parent'
     ) {
-      const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
-      editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
-      editor.update(() => {
-        initialEditorState()
-      }, {
-        tag: 'reload'
-      })
+      const currentMarkdown = editor
+          .getEditorState()
+          .read(() => $convertToMarkdownString(props.transformers))
+      if (currentMarkdown !== data.text) {
+        const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
+        editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
+        editor.update(() => {
+          initialEditorState()
+        }, {
+          tag: 'reload'
+        })
+      }
     } else {
       console.warn('message is not a MessageType', data)
     }
