@@ -21,11 +21,11 @@ import {ListItemNode, ListNode} from "@lexical/list";
 import LexicalReloadPlugin from "@/components/LexicalReloadPlugin.vue";
 import {EMOJI, EmojiNode} from "@/nodes/emoji.ts";
 import {$convertToMarkdownString, TRANSFORMERS} from "@lexical/markdown";
+import type {Transformer} from "@lexical/markdown";
 import {IMAGE, ImageNode} from "@/nodes/image.ts";
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
 import {MessageType} from "@/message.ts";
 import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
-import LexicalSlashMenuPlugin from "@/components/LexicalSlashMenuPlugin.vue";
 
 const config = {
   editable: true,
@@ -51,7 +51,7 @@ const onError = (error) => {
   console.error(error)
 }
 
-const T = [DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
+const T: Transformer[] = [DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
 console.log("T", T);
 
 const URL_MATCHER = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
@@ -130,7 +130,6 @@ const onChange = (editorState, editor, tags: Set<string>) => {
         <LexicalCheckListPlugin/>
         <LexicalTabIndentationPlugin/>
         <LexicalReloadPlugin :transformers="T"/>
-        <LexicalSlashMenuPlugin />
       </div>
     </div>
   </LexicalComposer>

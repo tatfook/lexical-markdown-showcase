@@ -3,11 +3,12 @@
 import {onMounted} from "vue";
 import {useEditor} from "lexical-vue";
 import {$convertFromMarkdownString} from "@lexical/markdown";
+import type {Transformer} from "@lexical/markdown";
 import {CLEAR_EDITOR_COMMAND} from "lexical";
 import {isMessageType, MessageType} from "@/message.ts";
 
 const props = defineProps<{
-  transformers: Array<Transformer>
+  transformers: Transformer[]
 }>()
 
 const editor = useEditor()
@@ -28,11 +29,8 @@ onMounted(() => {
         && (data.type === 'init' || data.type === 'update')
         && data.source === 'parent'
     ) {
-      // @ts-expect-error
       const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
-      editor.dispatchCommand(CLEAR_EDITOR_COMMAND, {
-        tag: 'reload'
-      })
+      editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
       editor.update(() => {
         initialEditorState()
       }, {

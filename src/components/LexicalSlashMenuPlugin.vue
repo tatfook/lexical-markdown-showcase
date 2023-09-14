@@ -459,6 +459,7 @@ onUnmounted(() => {
 
 <template>
   <Teleport v-if="data.isShow" :to="rootContainer">
+    <!-- @vue-ignore -->
     <DropdownMenu
         :hidden-on-click="true"
         :hidden-on-selection-change="false"

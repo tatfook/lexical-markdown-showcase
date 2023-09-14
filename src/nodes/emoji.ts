@@ -32,10 +32,8 @@ export class EmojiNode extends TextNode {
   }
 
   updateDOM(
-    // @ts-expect-error
     prevNode: TextNode,
     dom: HTMLElement,
-    // @ts-expect-error
     config: EditorConfig,
   ): boolean {
     const inner = dom.firstChild;
@@ -64,7 +62,6 @@ export class EmojiNode extends TextNode {
   }
 
   getTextContent(): string {
-    // @ts-expect-error
     return EmojiData[this.__text];
   }
 
@@ -94,7 +91,6 @@ export const EMOJI: TextMatchTransformer = {
   replace: (textNode, match: RegExpMatchArray) => {
     const [, text] = match;
     console.log("EmojiData", EmojiData);
-    // @ts-expect-error
     if (EmojiData[text]) {
       const emojiNode = $createEmojiNode(text);
       textNode.replace(emojiNode);
