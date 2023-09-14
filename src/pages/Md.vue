@@ -26,6 +26,13 @@ import {IMAGE, ImageNode} from "@/nodes/image.ts";
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
 import {MessageType} from "@/message.ts";
 import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
+import {onBeforeMount, onMounted, provide, ref} from "vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute()
+
+console.log("route.query.is_dev", route.query.is_dev);
+const isDev = ref(route.query.is_dev !== 'false')
 
 const config = {
   editable: true,
@@ -52,7 +59,6 @@ const onError = (error) => {
 }
 
 const T: Transformer[] = [DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
-console.log("T", T);
 
 const URL_MATCHER = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 
@@ -82,6 +88,19 @@ const MATCHERS = [
     )
   },
 ]
+
+const listens: ((msg: any) => void)[] = []
+provide('listens', listens)
+
+onBeforeMount(() => {
+  console.log('onBeforeMount')
+  // @ts-ignore
+  window.onListenMessage = (listen) => {
+    console.log('onListenMessage')
+    listens.push(listen)
+  }
+})
+
 const onChange = (editorState, editor, tags: Set<string>) => {
   if (tags.has('reload') || tags.has('history-merge')) {
     return
@@ -95,7 +114,7 @@ const onChange = (editorState, editor, tags: Set<string>) => {
     text: markdown,
     source: 'child'
   }
-  window.parent.postMessage(message, '*')
+  listens.forEach(listen => listen(message))
   console.log("markdown", markdown);
 }
 </script>
@@ -119,6 +138,7 @@ const onChange = (editorState, editor, tags: Set<string>) => {
         <LexicalMarkdownShortcutPlugin :transformers="T"/>
         <LexicalOnChangePlugin v-on:change="onChange" :ignoreSelectionChange="true"/>
         <LexicalTreeViewPlugin
+            v-if="isDev"
             view-class-name="tree-view-output"
             time-travel-panel-class-name="debug-timetravel-panel"
             time-travel-button-class-name="debug-timetravel-button"

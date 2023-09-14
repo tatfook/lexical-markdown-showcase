@@ -9,23 +9,26 @@ const MARKDOWN_EDITOR_REF = ref<HTMLDivElement | null>()
 
 const markdown = ref(ExampleMd)
 
-const onMessage = (event) => {
-  const {data} = event
+const init = () => {
+  // @ts-ignore
+  const sendMessage = IFRAME_REF.value?.contentWindow?.sendMessage
+  const meesage: MessageType = {
+    type: 'init',
+    text: ExampleMd,
+    source: 'parent'
+  }
+  sendMessage && sendMessage(meesage)
+}
+
+const onMessage = (data) => {
   if (!isMessageType(data)) {
     console.warn('message is not a MessageType', data)
     return
   }
-  console.log("data", data);
   if (data.type === 'loaded'
       && data.source === 'child'
   ) {
-    const postMessage = IFRAME_REF.value?.contentWindow?.postMessage
-    const meesage: MessageType = {
-      type: 'init',
-      text: ExampleMd,
-      source: 'parent'
-    }
-    postMessage && postMessage(meesage , '*')
+    init()
   }
   if (data.type === 'update'
       && data.source === 'child'
@@ -36,21 +39,26 @@ const onMessage = (event) => {
 }
 
 onMounted(() => {
-  window.addEventListener('message', onMessage)
+  setTimeout(() => {
+    // @ts-ignore
+    IFRAME_REF.value?.contentWindow.onListenMessage(onMessage)
+    init()
+  }, 2000)
+
 })
 
 onUnmounted(() => {
-  window.removeEventListener('message', onMessage)
 })
 
 const onInput = () => {
-  const postMessage = IFRAME_REF.value?.contentWindow?.postMessage
-  const message: MessageType = {
+  // @ts-ignore
+  const sendMessage = IFRAME_REF.value?.contentWindow?.sendMessage
+  const message = {
     type: 'update',
     text: MARKDOWN_EDITOR_REF.value!.innerText,
     source: 'parent'
   }
-  postMessage && postMessage(message, '*')
+  sendMessage && sendMessage(message, '*')
 }
 
 </script>

@@ -20,6 +20,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Markdown'
     }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Markdown2',
+    component: () => import('@/pages/Md.vue'),
+    meta: {
+      title: 'Markdown'
+    }
   }
 ]
 
