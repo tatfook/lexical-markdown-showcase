@@ -28,6 +28,7 @@ import {MessageType} from "@/message.ts";
 import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
 import {ref} from "vue";
 import {useRoute} from "vue-router";
+import ToolbarPlugin from "@/components/ToolbarPlugin.vue";
 
 const route = useRoute()
 const isDev = ref(route.query.is_dev !== 'false')
@@ -108,6 +109,7 @@ const onChange = (editorState, editor, tags: Set<string>) => {
 <template>
   <LexicalComposer :initialConfig="config" @error="onError">
     <div class="editor-container">
+      <ToolbarPlugin/>
       <div class="editor-inner">
         <LexicalRichTextPlugin>
           <template #contentEditable>
