@@ -34,6 +34,9 @@ import LexicalUnEditableOnBlurPlugin from "@/components/LexicalUnEditableOnBlurP
 import LexicalMinHeightWhenEditingPlugin from "@/components/LexicalMinHeightWhenEditingPlugin.vue";
 import LexicalCodeHighlightPlugin from "@/components/LexicalCodeHighlightPlugin.vue";
 import LexicalAutoAddBlockWhenArrowPlugin from "@/components/LexicalAutoAddBlockWhenArrowPlugin.vue";
+import {COLLAPSIBLE, CollapsibleContainerNode} from "@/nodes/CollapsibleContainerNode.ts";
+import {CollapsibleContentNode} from "@/nodes/CollapsibleContentNode.ts";
+import {CollapsibleTitleNode} from "@/nodes/CollapsibleTitleNode.ts";
 
 const route = useRoute()
 const isDev = ref(route.query.is_dev !== 'false')
@@ -126,13 +129,16 @@ const config = {
     EmojiNode,
     ImageNode,
     DividerNode,
+    CollapsibleContainerNode,
+    CollapsibleContentNode,
+    CollapsibleTitleNode,
   ],
 }
 const onError = (error) => {
   console.error(error)
 }
 
-const T: Transformer[] = [DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
+const T: Transformer[] = [COLLAPSIBLE, DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
 
 const URL_MATCHER = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 
@@ -226,10 +232,10 @@ const onChange = (editorState, editor, tags: Set<string>) => {
 @import 'github-markdown-css/github-markdown-light.css';
 @import 'src/assets/style.css';
 
-.markdown-body code{
+.markdown-body .editor-code{
   padding: 16px;
 }
-.markdown-body code br{
+.markdown-body .editor-code br{
   display: block;
 }
 #app{

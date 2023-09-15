@@ -148,5 +148,7 @@
   "black_medium_small_square": "◾",
   "white_medium_small_square": "◽",
   "black_small_square": "▪️",
-  "white_small_square": "▫️"
+  "white_small_square": "▫️",
+  "point_right": "👉",
+  "point_left": "👈"
 }
