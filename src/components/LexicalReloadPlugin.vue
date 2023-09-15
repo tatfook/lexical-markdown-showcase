@@ -5,7 +5,7 @@ import {useEditor} from "lexical-vue";
 import {$convertFromMarkdownString, $convertToMarkdownString} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
 import {CLEAR_EDITOR_COMMAND} from "lexical";
-import {isMessageType, MessageType} from "@/message.ts";
+import {isMessageType, MessageType} from "@/message";
 
 const props = defineProps<{
   transformers: Transformer[]

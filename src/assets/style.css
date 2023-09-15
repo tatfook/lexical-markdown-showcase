@@ -1,25 +1,4 @@
-body {
-    margin: 0;
-    background: #eee;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular",
-    sans-serif;
-    font-weight: 500;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-button:focus{
-    outline: none;
-}
 
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    height: 100vh;
-    width: 100vw;
-}
 
 .other h2 {
     font-size: 18px;
@@ -167,7 +146,7 @@ h1 {
     position: relative;
 }
 
-.editor-code:before {
+/*.editor-code:before {
     content: attr(data-gutter);
     position: absolute;
     background-color: #eee;
@@ -189,7 +168,7 @@ h1 {
     text-transform: uppercase;
     position: absolute;
     color: rgba(0, 0, 0, 0.5);
-}
+}*/
 
 .editor-tokenComment {
     color: slategray;

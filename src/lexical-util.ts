@@ -178,7 +178,6 @@ export function $wrapNodesImpl(
 
   let targetIsPrevSibling = false;
   while (target !== null) {
-    // @ts-expect-error
     const prevSibling = target.getPreviousSibling<ElementNode>();
     if (prevSibling !== null) {
       target = prevSibling;

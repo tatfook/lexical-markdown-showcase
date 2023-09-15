@@ -19,13 +19,13 @@ import {CodeHighlightNode, CodeNode} from "@lexical/code";
 import {HeadingNode, QuoteNode} from "@lexical/rich-text";
 import {ListItemNode, ListNode} from "@lexical/list";
 import LexicalReloadPlugin from "@/components/LexicalReloadPlugin.vue";
-import {EMOJI, EmojiNode} from "@/nodes/emoji.ts";
+import {EMOJI, EmojiNode} from "@/nodes/emoji";
 import {$convertToMarkdownString, TRANSFORMERS} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
-import {IMAGE, ImageNode} from "@/nodes/image.ts";
+import {IMAGE, ImageNode} from "@/nodes/image";
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
-import {MessageType} from "@/message.ts";
-import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
+import {MessageType} from "@/message";
+import {DIVIDER, DividerNode} from "@/nodes/divider";
 import {ref} from "vue";
 import {useRoute} from "vue-router";
 import ToolbarPlugin from "@/components/ToolbarPlugin.vue";
@@ -33,6 +33,7 @@ import LexicalEditablePlugin from "@/components/LexicalEditablePlugin.vue";
 import LexicalUnEditableOnBlurPlugin from "@/components/LexicalUnEditableOnBlurPlugin.vue";
 import LexicalMinHeightWhenEditingPlugin from "@/components/LexicalMinHeightWhenEditingPlugin.vue";
 import LexicalCodeHighlightPlugin from "@/components/LexicalCodeHighlightPlugin.vue";
+import LexicalAutoAddBlockWhenArrowPlugin from "@/components/LexicalAutoAddBlockWhenArrowPlugin.vue";
 
 const route = useRoute()
 const isDev = ref(route.query.is_dev !== 'false')
@@ -41,6 +42,74 @@ const isEditable = ref(route.query.is_editable !== 'false')
 
 const config = {
   editable: isEditable.value,
+  theme: {
+    'ltr': 'ltr',
+    'rtl': 'rtl',
+    'placeholder': 'editor-placeholder',
+    'paragraph': 'editor-paragraph',
+    'quote': 'editor-quote',
+    'heading': {
+      h1: 'editor-heading-h1',
+      h2: 'editor-heading-h2',
+      h3: 'editor-heading-h3',
+      h4: 'editor-heading-h4',
+      h5: 'editor-heading-h5',
+    },
+    'list': {
+      nested: {
+        listitem: 'editor-nested-listitem',
+      },
+      ol: 'editor-list-ol',
+      ul: 'editor-list-ul',
+      listitem: 'editor-listitem',
+    },
+    'image': 'editor-image',
+    'm-latex': 'editor-latex',
+    'link': 'editor-link',
+    'hashtag': 'editor-text-hashtag',
+    'text': {
+      bold: 'editor-text-bold',
+      italic: 'editor-text-italic',
+      underline: 'editor-text-underline',
+      strikethrough: 'editor-text-strikethrough',
+      underlineStrikethrough: 'editor-text-underlineStrikethrough',
+      code: 'editor-text-code',
+    },
+    'code': 'editor-code',
+    'codeHighlight': {
+      'atrule': 'editor-tokenAttr',
+      'attr': 'editor-tokenAttr',
+      'boolean': 'editor-tokenProperty',
+      'builtin': 'editor-tokenSelector',
+      'cdata': 'editor-tokenComment',
+      'char': 'editor-tokenSelector',
+      'class': 'editor-tokenFunction',
+      'class-name': 'editor-tokenFunction',
+      'comment': 'editor-tokenComment',
+      'constant': 'editor-tokenProperty',
+      'deleted': 'editor-tokenProperty',
+      'doctype': 'editor-tokenComment',
+      'entity': 'editor-tokenOperator',
+      'function': 'editor-tokenFunction',
+      'important': 'editor-tokenVariable',
+      'inserted': 'editor-tokenSelector',
+      'keyword': 'editor-tokenAttr',
+      'namespace': 'editor-tokenVariable',
+      'number': 'editor-tokenProperty',
+      'operator': 'editor-tokenOperator',
+      'prolog': 'editor-tokenComment',
+      'property': 'editor-tokenProperty',
+      'punctuation': 'editor-tokenPunctuation',
+      'regex': 'editor-tokenVariable',
+      'selector': 'editor-tokenSelector',
+      'string': 'editor-tokenSelector',
+      'symbol': 'editor-tokenProperty',
+      'tag': 'editor-tokenProperty',
+      'url': 'editor-tokenOperator',
+      'variable': 'editor-tokenVariable',
+    },
+    'divider': 'editor-divider',
+  },
   nodes: [
     HeadingNode,
     ListNode,
@@ -146,6 +215,7 @@ const onChange = (editorState, editor, tags: Set<string>) => {
         <LexicalEditablePlugin/>
         <LexicalUnEditableOnBlurPlugin/>
         <LexicalMinHeightWhenEditingPlugin/>
+        <LexicalAutoAddBlockWhenArrowPlugin/>
 
       </div>
     </div>
@@ -154,6 +224,14 @@ const onChange = (editorState, editor, tags: Set<string>) => {
 
 <style lang="scss">
 @import 'github-markdown-css/github-markdown-light.css';
+@import 'src/assets/style.css';
+
+.markdown-body code{
+  padding: 16px;
+}
+.markdown-body code br{
+  display: block;
+}
 #app{
   background: #FFF;
 }

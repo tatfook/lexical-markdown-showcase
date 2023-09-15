@@ -26,7 +26,7 @@ import {
   getDefaultCodeLanguage,
 } from '@lexical/code'
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link'
-import { getSelectedNode } from '../lexical-util.ts'
+import { getSelectedNode } from '../lexical-util'
 import BlockOptionsDropdownList from './BlockOptionsDropdownList.vue'
 import CodeLanguageSelect from './CodeLanguageSelect.vue'
 import FloatingLinkEditor from './FloatingLinkEditor.vue'

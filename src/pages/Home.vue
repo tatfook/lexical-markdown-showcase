@@ -2,7 +2,7 @@
 import {onMounted, onUnmounted, ref} from "vue";
 
 import ExampleMd from '@/assets/example.md'
-import {isMessageType, MessageType} from "@/message.ts";
+import {isMessageType, MessageType} from "@/message";
 
 const IFRAME_REF = ref<HTMLIFrameElement | null>()
 const MARKDOWN_EDITOR_REF = ref<HTMLDivElement | null>()
@@ -96,12 +96,11 @@ const onInput = () => {
   margin: 0 auto;
   width: 80vw;
   display: flex;
-  height: 600px;
+  min-height: 600px;
 }
 
 .markdown-display{
   width: 50%;
-  height: 100%;
   border: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
