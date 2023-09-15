@@ -59,7 +59,7 @@ const onInput = () => {
     <h1>Lexical Vue Markdown Demo</h1>
     <p>Note: this is an experimental build of Lexical</p>
     <div class="two-editor-container">
-      <iframe ref="IFRAME_REF" src="./md" frameborder="0" class="markdown-display"></iframe>
+      <iframe ref="IFRAME_REF" src="./md?is_editable=false" frameborder="0" class="markdown-display"></iframe>
       <div class="markdown-editor" @input="onInput" contenteditable="true" ref="MARKDOWN_EDITOR_REF">
         <p v-for="(md, index) in markdown.split('\n')" :key="index">
           <span v-if="md !== ''">{{ md }}</span>

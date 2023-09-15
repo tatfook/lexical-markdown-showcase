@@ -73,6 +73,7 @@ const isUnderline = ref(false)
 const isStrikethrough = ref(false)
 const isCode = ref(false)
 const showBlockOptionsDropDown = ref(false)
+const isShow = ref(true)
 
 function updateToolbar() {
   const selection = $getSelection() as RangeSelection
@@ -120,6 +121,7 @@ function updateToolbar() {
 let unregisterMergeListener: () => void
 
 onMounted(() => {
+  isShow.value = editor._editable
   unregisterMergeListener = mergeRegister(
     editor.registerUpdateListener(({ editorState }) => {
       editorState.read(() => {
@@ -148,7 +150,11 @@ onMounted(() => {
         return false
       },
       LowPriority,
-    ))
+    ),
+    editor.registerEditableListener((editable) => {
+      isShow.value = editable
+    })
+  )
 })
 
 const codeLanguages = getCodeLanguages() as string[]
@@ -177,7 +183,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="toolbarRef" class="toolbar">
+  <div ref="toolbarRef" class="toolbar" v-if="isShow">
     <button :disabled="!canUndo" class="toolbar-item spaced" aria-label="Undo"
             @click="editor.dispatchCommand(UNDO_COMMAND, undefined)">
       <i class="format undo"/>

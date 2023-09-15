@@ -26,6 +26,7 @@
     "@lexical/text": "0.12.2",
     "@lexical/utils": "0.12.2",
     "@lexical/yjs": "0.12.2",
+    "@vueuse/core": "^10.4.1",
     "github-markdown-css": "^5.2.0",
     "lexical": "^0.12.2",
     "lexical-vue": "0.7.0",

@@ -29,12 +29,18 @@ import {DIVIDER, DividerNode} from "@/nodes/divider.ts";
 import {ref} from "vue";
 import {useRoute} from "vue-router";
 import ToolbarPlugin from "@/components/ToolbarPlugin.vue";
+import LexicalEditablePlugin from "@/components/LexicalEditablePlugin.vue";
+import LexicalUnEditableOnBlurPlugin from "@/components/LexicalUnEditableOnBlurPlugin.vue";
+import LexicalMinHeightWhenEditingPlugin from "@/components/LexicalMinHeightWhenEditingPlugin.vue";
+import LexicalCodeHighlightPlugin from "@/components/LexicalCodeHighlightPlugin.vue";
 
 const route = useRoute()
 const isDev = ref(route.query.is_dev !== 'false')
+const isEditable = ref(route.query.is_editable !== 'false')
+
 
 const config = {
-  editable: true,
+  editable: isEditable.value,
   nodes: [
     HeadingNode,
     ListNode,
@@ -92,7 +98,6 @@ const onChange = (editorState, editor, tags: Set<string>) => {
   if (tags.has('reload') || tags.has('history-merge')) {
     return
   }
-  console.log("tags", tags);
   const markdown = editor
       .getEditorState()
       .read(() => $convertToMarkdownString(T))
@@ -102,7 +107,6 @@ const onChange = (editorState, editor, tags: Set<string>) => {
     source: 'child'
   }
   window.parent.postMessage(message, '*')
-  console.log("markdown", markdown);
 }
 </script>
 
@@ -136,8 +140,13 @@ const onChange = (editorState, editor, tags: Set<string>) => {
         <LexicalHistoryPlugin/>
         <LexicalListPlugin/>
         <LexicalCheckListPlugin/>
+        <LexicalCodeHighlightPlugin/>
         <LexicalTabIndentationPlugin/>
         <LexicalReloadPlugin :transformers="T"/>
+        <LexicalEditablePlugin/>
+        <LexicalUnEditableOnBlurPlugin/>
+        <LexicalMinHeightWhenEditingPlugin/>
+
       </div>
     </div>
   </LexicalComposer>

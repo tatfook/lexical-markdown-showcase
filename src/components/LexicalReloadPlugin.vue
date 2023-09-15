@@ -25,8 +25,11 @@ onMounted(() => {
   }
   window.addEventListener('message', (event) => {
     const {data} = event
-    if (isMessageType(data)
-        && (data.type === 'init' || data.type === 'update')
+    if (!isMessageType(data)) {
+      console.warn('message is not a MessageType', data)
+      return
+    }
+    if ((data.type === 'init' || data.type === 'update')
         && data.source === 'parent'
     ) {
       const currentMarkdown = editor
@@ -41,8 +44,6 @@ onMounted(() => {
           tag: 'reload'
         })
       }
-    } else {
-      console.warn('message is not a MessageType', data)
     }
   })
 })
