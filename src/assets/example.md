@@ -2,6 +2,38 @@
 Hello :grinning:
 
 ---
+# Html support
+<style>img{max-width: 50%;}</style>
+
+# Details html support
+
+<details>
+<summary>Summary</summary>
+Details content
+</details>
+<details open>
+<summary>Summary when details is open</summary>
+Details content
+</details>
+
+#> Summary when use markdown
+Content
+#
+
+#>> Summary when use markdown and open
+Content
+#
+
+# Inline style in block style
+
+> This is quote, and [this is a link](https://github.com)
+
+> This is quote, and [this is a link](https://github.com), and this is an emoji :joy:
+
+# Block style in block style
+
+> # Heading style in quote
+> here is content
 
 ## Images
 

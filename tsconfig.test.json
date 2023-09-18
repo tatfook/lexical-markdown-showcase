@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "allowSyntheticDefaultImports": false,
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true
+  }
+}

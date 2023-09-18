@@ -6,8 +6,6 @@
  *
  */
 
-'use strict';
-
 const common = {
   modulePathIgnorePatterns: ['/npm'],
 };
@@ -37,4 +35,11 @@ module.exports = {
       ],
     },
   ],
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json',
+    }
+  }
 };
+
+export {}

@@ -243,3 +243,134 @@ export const COLLAPSIBLE: ElementTransformer = {
   },
   type: 'element',
 }
+
+export const COLLAPSIBLE_HTML: ElementTransformer = {
+  dependencies: [CollapsibleContainerNode, CollapsibleContentNode, CollapsibleTitleNode],
+  export: (node: LexicalNode, exportChildren: (elementNode: ElementNode) => string) => {
+    if (!$isCollapsibleContainerNode(node)) {
+      return null
+    }
+
+    function repeatString(str: string, times: number): string {
+      let result = ''
+      for (let i = 0; i < times; i++) {
+        result += str
+      }
+      return result
+    }
+
+    const titleNodes = node.getChildren().filter(n => $isCollapsibleTitleNode(n))
+
+    // #
+    const markSymbol = repeatString('#', node.__level)
+
+    if (titleNodes.length !== 1) {
+      return markSymbol + `${node.getOpen() ? '>>' : '>'} \n` + markSymbol
+    }
+    const title = titleNodes[0].getTextContent()
+
+    const contentNodes = node.getChildren().filter(n => $isCollapsibleContentNode(n))
+    if (contentNodes.length !== 1) {
+      return markSymbol + `${node.getOpen() ? '>>' : '>'} ${title}\n` + markSymbol
+    }
+    // @ts-ignore
+    return markSymbol + `${node.getOpen() ? '>>' : '>'} ${title}\n${exportChildren(contentNodes[0] as ElementNode)}\n` + markSymbol
+  },
+  getNumberOfLines: (lines: string[], startLineIndex: number) => {
+    const REG_EXP = /^<details( open)?>$/
+    const CLOSE_REG_EXP = /^<\/details>$/
+    const questionMatch = lines[startLineIndex].match(REG_EXP)
+    if (!questionMatch) {
+      return 1
+    }
+    // 如果当前的level=2即##
+    let endLineIndex = startLineIndex
+    const linesLength = lines.length
+    while (++endLineIndex < linesLength) {
+      /**
+       * #> Details
+       * #
+       * when is line 2, just like above
+       */
+      if (lines[endLineIndex] === questionMatch[1]) {
+        return endLineIndex - startLineIndex
+      }
+      /**
+       * #> Details1
+       * #> Details2
+       * when is line 2, just like above
+       */
+      const closeMatch = lines[endLineIndex].match(CLOSE_REG_EXP)
+      if (closeMatch) {
+        return endLineIndex - startLineIndex
+      }
+    }
+    return endLineIndex - startLineIndex
+  },
+  regExp: /^<details\W?(open)?>$/,
+  closeRegExp: /^<\/details>$/,
+  getChildrenFromLines(lines: string[]) {
+    const children: ElementNode[] = []
+    let p = $createParagraphNode()
+    children.push(p)
+    for (const line of lines) {
+      if (line !== '') {
+        if (p.getChildrenSize() >= 1) {
+          p.append($createLineBreakNode())
+        }
+        p.append($createTextNode(line))
+      } else {
+        p = $createParagraphNode()
+        children.push(p)
+      }
+    }
+    return children
+  },
+  replace: (parentNode: ElementNode, children: Array<LexicalNode>, match: Array<string>, isImport: boolean) => {
+    const [, open] = match
+    console.log("match", match);
+    const node = $createCollapsibleContainerNode(open !== undefined && open === 'open', 1)
+    // const titleNode = $createCollapsibleTitleNode()
+    // titleNode.append($createTextNode(summary))
+    // node.append(titleNode)
+    const contentNode = $createCollapsibleContentNode()
+    if ($isCollapsibleTitleNode(children[0])) {
+      node.append(children[0])
+      // from index 1 to the last
+      contentNode.append(...children.slice(1))
+    } else {
+      contentNode.append(...children)
+    }
+
+    node.append(contentNode)
+    parentNode.replace(node)
+    // titleNode.select()
+  },
+  type: 'element',
+}
+
+export const COLLAPSIBLE_TITLE_HTML: ElementTransformer = {
+  dependencies: [CollapsibleContainerNode, CollapsibleContentNode, CollapsibleTitleNode],
+  export: (node: LexicalNode, exportChildren: (elementNode: ElementNode) => string) => {
+    // 交给container node 处理
+    return null
+  },
+  regExp: /^\W*?<summary>(.*?)<\/summary>$/,
+  replace: (parentNode: ElementNode, children: Array<LexicalNode>, match: Array<string>, isImport: boolean) => {
+    const [, summary] = match
+    if (!summary) {
+      return
+    }
+    const titleNode = $createCollapsibleTitleNode()
+    titleNode.append($createTextNode(summary))
+    const pp = parentNode.getParent()
+    if (pp && $isCollapsibleContentNode(pp)) {
+      console.log('insertBefore')
+      pp.insertBefore(titleNode)
+    } else {
+      console.log('replace', pp)
+      parentNode.replace(titleNode)
+    }
+  },
+  type: 'element',
+}
