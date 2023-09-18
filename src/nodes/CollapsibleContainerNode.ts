@@ -328,7 +328,6 @@ export const COLLAPSIBLE_HTML: ElementTransformer = {
   },
   replace: (parentNode: ElementNode, children: Array<LexicalNode>, match: Array<string>, isImport: boolean) => {
     const [, open] = match
-    console.log("match", match);
     const node = $createCollapsibleContainerNode(open !== undefined && open === 'open', 1)
     // const titleNode = $createCollapsibleTitleNode()
     // titleNode.append($createTextNode(summary))
@@ -365,10 +364,8 @@ export const COLLAPSIBLE_TITLE_HTML: ElementTransformer = {
     titleNode.append($createTextNode(summary))
     const pp = parentNode.getParent()
     if (pp && $isCollapsibleContentNode(pp)) {
-      console.log('insertBefore')
       pp.insertBefore(titleNode)
     } else {
-      console.log('replace', pp)
       parentNode.replace(titleNode)
     }
   },

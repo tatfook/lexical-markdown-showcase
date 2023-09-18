@@ -2,8 +2,12 @@
 Hello :grinning:
 
 ---
-# Html support
-<style>img{max-width: 50%;}</style>
+# Style support
+<style>
+img
+{max-width: 50% !important;}
+h1{color: #666 !important;}
+</style>
 
 # Details html support
 

@@ -5,7 +5,6 @@ import raw from 'vite-raw-plugin'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'http://localhost',
   plugins: [vue(), raw({
     fileRegex: /\.md$/i,
   })],

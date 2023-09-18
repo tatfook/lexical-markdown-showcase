@@ -8,6 +8,9 @@ yarn
 # Build
 yarn build
 
+# Custom Host Build
+yarn build --base https://yourhost.com
+
 # Deploy
 set the 'dist' as the root directory in Nginx.
 
