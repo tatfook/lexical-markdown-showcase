@@ -330,13 +330,15 @@ export const COLLAPSIBLE_HTML: ElementTransformer = {
     const [, open] = match
     const node = $createCollapsibleContainerNode(open !== undefined && open === 'open', 1)
     const contentNode = $createCollapsibleContentNode()
-    if ($isCollapsibleTitleNode(children[0])) {
-      node.append(children[0])
-      // from index 1 to the last
-      contentNode.append(...children.slice(1))
-    } else {
-      contentNode.append(...children)
+    // 在修改markdown的时候会有一个空paragraph在第一个
+    for (const child of children) {
+      if ($isCollapsibleTitleNode(child)) {
+        node.append(child)
+      } else {
+        contentNode.append(child)
+      }
     }
+
 
     node.append(contentNode)
     parentNode.replace(node)
