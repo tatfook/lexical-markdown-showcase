@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref, watchEffect} from "vue";
 
 import ExampleMd from '@/assets/example.md'
 import {isMessageType, MessageType} from "@/message";
 
 const IFRAME_REF = ref<HTMLIFrameElement | null>()
-const MARKDOWN_EDITOR_REF = ref<HTMLDivElement | null>()
+const MARKDOWN_EDITOR_REF = ref<HTMLTextAreaElement | null>()
 
 const markdown = ref(ExampleMd)
 
@@ -46,7 +46,7 @@ const onInput = () => {
   const postMessage = IFRAME_REF.value?.contentWindow?.postMessage
   const message: MessageType = {
     type: 'update',
-    text: MARKDOWN_EDITOR_REF.value!.innerText,
+    text: MARKDOWN_EDITOR_REF.value!.value,
     source: 'parent'
   }
   postMessage && postMessage(message, '*')
@@ -60,12 +60,9 @@ const onInput = () => {
     <p>Note: this is an experimental build of Lexical</p>
     <div class="two-editor-container">
       <iframe ref="IFRAME_REF" src="./md?is_editable=false" frameborder="0" class="markdown-display"></iframe>
-      <div class="markdown-editor" @input="onInput" contenteditable="true" ref="MARKDOWN_EDITOR_REF">
-        <p v-for="(md, index) in markdown.split('\n')" :key="md+index">
-          <span v-if="md !== ''">{{ md }}</span>
-          <br v-else/>
-        </p>
-      </div>
+      <textarea class="markdown-editor" @input="onInput" contenteditable="true" ref="MARKDOWN_EDITOR_REF"
+                v-model="markdown">
+      </textarea>
     </div>
     <div class="other">
       <h2>View source</h2>
@@ -109,12 +106,15 @@ const onInput = () => {
 .markdown-editor {
   overflow-y: auto;
   width: 50%;
+  color: #333;
   background: #FFF;
+  border: none;
   border-left: 1px solid #cccccc;
   text-align: left;
   padding: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  resize: none;
 
   &:focus {
     outline: none;
