@@ -330,7 +330,7 @@ export const COLLAPSIBLE_HTML: ElementTransformer = {
     const [, open] = match
     const node = $createCollapsibleContainerNode(open !== undefined && open === 'open', 1)
     const contentNode = $createCollapsibleContentNode()
-    // 在修改markdown的时候会有一个空paragraph在第一个
+    // When modifying markdown, there will be an empty paragraph at the first.
     for (const child of children) {
       if ($isCollapsibleTitleNode(child)) {
         node.append(child)
