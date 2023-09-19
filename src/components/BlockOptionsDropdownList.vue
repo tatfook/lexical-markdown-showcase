@@ -73,29 +73,18 @@ function formatParagraph() {
   emit('update:showBlockOptionsDropDown', false)
 }
 
-function formatLargeHeading() {
-  if (props.blockType !== 'h1') {
+function formatHeading(tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') {
+  if (props.blockType !== tag) {
     editor.update(() => {
       const selection = $getSelection()
 
       if ($isRangeSelection(selection))
-        $wrapNodes(selection, () => $createHeadingNode('h1'))
+        $wrapNodes(selection, () => $createHeadingNode(tag))
     })
   }
   emit('update:showBlockOptionsDropDown', false)
 }
 
-function formatSmallHeading() {
-  if (props.blockType !== 'h2') {
-    editor.update(() => {
-      const selection = $getSelection()
-
-      if ($isRangeSelection(selection))
-        $wrapNodes(selection, () => $createHeadingNode('h2'))
-    })
-  }
-  emit('update:showBlockOptionsDropDown', false)
-}
 
 function formatBulletList() {
   if (props.blockType !== 'ul')
@@ -146,37 +135,42 @@ function formatCode() {
   <div ref="dropDownRef" class="dropdown">
     <button class="item" @click="formatParagraph">
       <span class="icon paragraph" />
-      <span class="text">Normal</span>
+      <span class="text">段落</span>
       <span v-if="blockType === 'paragraph'" class="active" />
     </button>
-    <button class="item" @click="formatLargeHeading">
-      <span class="icon large-heading" />
-      <span class="text">Large Heading</span>
+    <button class="item" @click="() => formatHeading('h1')">
+      <span class="icon h1" />
+      <span class="text">一级标题</span>
       <span v-if="blockType === 'h1'" class="active" />
     </button>
-    <button class="item" @click="formatSmallHeading">
-      <span class="icon small-heading" />
-      <span class="text">Small Heading</span>
-      <span v-if="blockType === 'h2'" class="active" />
+    <button class="item" @click="() => formatHeading('h2')">
+      <span class="icon h2"/>
+      <span class="text">二级标题</span>
+      <span v-if="blockType === 'h2'" class="active"/>
+    </button>
+    <button class="item" @click="() => formatHeading('h3')">
+      <span class="icon h3"/>
+      <span class="text">三级标题</span>
+      <span v-if="blockType === 'h3'" class="active"/>
     </button>
     <button class="item" @click="formatBulletList">
       <span class="icon bullet-list" />
-      <span class="text">Bullet List</span>
+      <span class="text">无序列表</span>
       <span v-if="blockType === 'ul'" class="active" />
     </button>
     <button class="item" @click="formatNumberedList">
       <span class="icon numbered-list" />
-      <span class="text">Numbered List</span>
+      <span class="text">有序列表</span>
       <span v-if="blockType === 'ol'" class="active" />
     </button>
     <button class="item" @click="formatQuote">
       <span class="icon quote" />
-      <span class="text">Quote</span>
+      <span class="text">引用</span>
       <span v-if="blockType === 'quote'" class="active" />
     </button>
     <button class="item" @click="formatCode">
       <span class="icon code" />
-      <span class="text">Code Block</span>
+      <span class="text">代码块</span>
       <span v-if="blockType === 'code'" class="active" />
     </button>
   </div>

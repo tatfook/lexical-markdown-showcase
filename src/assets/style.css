@@ -644,14 +644,16 @@ i.redo {
     background-image: url(images/icons/text-paragraph.svg);
 }
 
-.icon.large-heading,
 .icon.h1 {
     background-image: url(images/icons/type-h1.svg);
 }
 
-.icon.small-heading,
 .icon.h2 {
     background-image: url(images/icons/type-h2.svg);
+}
+
+.icon.h3 {
+    background-image: url(images/icons/type-h3.svg);
 }
 
 .icon.bullet-list,

@@ -34,9 +34,15 @@ import LexicalUnEditableOnBlurPlugin from "@/components/LexicalUnEditableOnBlurP
 import LexicalMinHeightWhenEditingPlugin from "@/components/LexicalMinHeightWhenEditingPlugin.vue";
 import LexicalCodeHighlightPlugin from "@/components/LexicalCodeHighlightPlugin.vue";
 import LexicalAutoAddBlockWhenArrowPlugin from "@/components/LexicalAutoAddBlockWhenArrowPlugin.vue";
-import {COLLAPSIBLE, CollapsibleContainerNode} from "@/nodes/CollapsibleContainerNode.ts";
-import {CollapsibleContentNode} from "@/nodes/CollapsibleContentNode.ts";
-import {CollapsibleTitleNode} from "@/nodes/CollapsibleTitleNode.ts";
+import {
+  COLLAPSIBLE,
+  COLLAPSIBLE_HTML,
+  COLLAPSIBLE_TITLE_HTML,
+  CollapsibleContainerNode
+} from "@/nodes/CollapsibleContainerNode";
+import {CollapsibleContentNode} from "@/nodes/CollapsibleContentNode";
+import {CollapsibleTitleNode} from "@/nodes/CollapsibleTitleNode";
+import {HTML, HtmlNode} from "@/nodes/html";
 
 const route = useRoute()
 const isDev = ref(route.query.is_dev !== 'false')
@@ -132,13 +138,14 @@ const config = {
     CollapsibleContainerNode,
     CollapsibleContentNode,
     CollapsibleTitleNode,
+    HtmlNode,
   ],
 }
 const onError = (error) => {
   console.error(error)
 }
 
-const T: Transformer[] = [COLLAPSIBLE, DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
+const T: Transformer[] = [HTML, COLLAPSIBLE_HTML, COLLAPSIBLE_TITLE_HTML, COLLAPSIBLE, DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
 
 const URL_MATCHER = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 

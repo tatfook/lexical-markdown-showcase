@@ -40,21 +40,23 @@ const supportedBlockTypes = new Set([
   'code',
   'h1',
   'h2',
+  'h3',
   'ul',
   'ol',
 ])
 
 const blockTypeToBlockName: Record<string, string> = {
-  code: 'Code Block',
-  h1: 'Large Heading',
-  h2: 'Small Heading',
-  h3: 'Heading',
-  h4: 'Heading',
-  h5: 'Heading',
-  ol: 'Numbered List',
-  paragraph: 'Normal',
-  quote: 'Quote',
-  ul: 'Bulleted List',
+  code: '代码块',
+  h1: '一级标题',
+  h2: '二级标题',
+  h3: '三级标题',
+  h4: '四级标题',
+  h5: '五级标题',
+  h6: '六级标题',
+  ol: '有序列表',
+  paragraph: '段落',
+  quote: '引用',
+  ul: '无序列表',
 }
 
 const toolbarRef = ref<HTMLDivElement | null>(null)

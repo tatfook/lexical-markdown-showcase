@@ -149,7 +149,6 @@ export const IMAGE: TextMatchTransformer = {
     regExp: /!\[(.*?)\]\((.*?)(\s"(.*?)")?\)/,
     replace: (textNode, match) => {
         const [_, altText, url, _1, title] = match
-        console.log("match", match);
         const imageNode = $createImageNode({
             altText,
             src: url,

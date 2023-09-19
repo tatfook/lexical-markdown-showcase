@@ -732,9 +732,9 @@
   dependencies:
     "@lexical/utils" "0.12.2"
 
-"@lexical/markdown@^0.12.0", "@lexical/markdown@https://gh2npm-vercel.meogic.com/api/tatfook/lexical-for-keepwork/packages/lexical-markdown/npm?branch=keepwork-main":
+"@lexical/markdown@^0.12.0", "@lexical/markdown@https://gh2npm-vercel.meogic.com/api/tatfook/lexical-for-keepwork/packages/lexical-markdown/npm?commit=3dbb47454d18bd4ceb08363dbafe7e30ab586302":
   version "0.12.2"
-  resolved "https://gh2npm-vercel.meogic.com/api/tatfook/lexical-for-keepwork/packages/lexical-markdown/npm?branch=keepwork-main#e9051ed4ec4e400b2f014ad2851b90b39e20f8d5"
+  resolved "https://gh2npm-vercel.meogic.com/api/tatfook/lexical-for-keepwork/packages/lexical-markdown/npm?commit=3dbb47454d18bd4ceb08363dbafe7e30ab586302#f4d318aea098913902a0499bd00a8b2da31a641f"
   dependencies:
     "@lexical/code" "0.12.2"
     "@lexical/link" "0.12.2"
