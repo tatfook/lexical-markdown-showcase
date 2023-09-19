@@ -142,27 +142,30 @@ describe('Markdown', () => {
   }>;
 
   const IMPORT_AND_EXPORT: Input = [
-//     {
-//       html: '<pre spellcheck="false" data-highlight-language="html"><p><span style="white-space: pre-wrap;">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</span><br><span style="white-space: pre-wrap;">&lt;link rel="stylesheet" href="github-markdown.css"&gt;</span><br><span style="white-space: pre-wrap;">&lt;style&gt;</span><br><span style="white-space: pre-wrap;">.markdown-body {</span><br><span style="white-space: pre-wrap;">box-sizing: border-box;</span><br><span style="white-space: pre-wrap;">min-width: 200px;</span><br><span style="white-space: pre-wrap;">max-width: 980px;</span><br><span style="white-space: pre-wrap;">margin: 0 auto;</span><br><span style="white-space: pre-wrap;">padding: 45px;</span><br><span style="white-space: pre-wrap;">}</span></p><p><br></p><p><span style="white-space: pre-wrap;">@media (max-width: 767px) {</span><br><span style="white-space: pre-wrap;">.markdown-body {</span><br><span style="white-space: pre-wrap;">padding: 15px;</span><br><span style="white-space: pre-wrap;">}</span><br><span style="white-space: pre-wrap;">}</span><br><span style="white-space: pre-wrap;">&lt;/style&gt;</span><br><span style="white-space: pre-wrap;">&lt;article class="markdown-body"&gt;</span><br><span style="white-space: pre-wrap;">&lt;h1&gt;Unicorns&lt;/h1&gt;</span><br><span style="white-space: pre-wrap;">&lt;p&gt;All the things&lt;/p&gt;</span><br><span style="white-space: pre-wrap;">&lt;/article&gt;</span></p></pre>',
-//       md: `\`\`\`html
-// <style>
-// \t.markdown-body {
-// \t\tbox-sizing: border-box;
-// \t\tmin-width: 200px;
-// \t\tmax-width: 980px;
-// \t\tmargin: 0 auto;
-// \t\tpadding: 45px;
-// \t}
-// </style>
-// \`\`\``,
-//     },
     {
-      html: '<details>',
-      md: `<details>
-<summary>Summary</summary>
-content
-</details>`,
-    }
+      html: '<pre spellcheck="false" data-highlight-language="html"><p><span style="white-space: pre-wrap;">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</span><br><span style="white-space: pre-wrap;">&lt;link rel="stylesheet" href="github-markdown.css"&gt;</span><br><span style="white-space: pre-wrap;">&lt;style&gt;</span><br><span style="white-space: pre-wrap;">.markdown-body {</span><br><span style="white-space: pre-wrap;">box-sizing: border-box;</span><br><span style="white-space: pre-wrap;">min-width: 200px;</span><br><span style="white-space: pre-wrap;">max-width: 980px;</span><br><span style="white-space: pre-wrap;">margin: 0 auto;</span><br><span style="white-space: pre-wrap;">padding: 45px;</span><br><span style="white-space: pre-wrap;">}</span></p><p><br></p><p><span style="white-space: pre-wrap;">@media (max-width: 767px) {</span><br><span style="white-space: pre-wrap;">.markdown-body {</span><br><span style="white-space: pre-wrap;">padding: 15px;</span><br><span style="white-space: pre-wrap;">}</span><br><span style="white-space: pre-wrap;">}</span><br><span style="white-space: pre-wrap;">&lt;/style&gt;</span><br><span style="white-space: pre-wrap;">&lt;article class="markdown-body"&gt;</span><br><span style="white-space: pre-wrap;">&lt;h1&gt;Unicorns&lt;/h1&gt;</span><br><span style="white-space: pre-wrap;">&lt;p&gt;All the things&lt;/p&gt;</span><br><span style="white-space: pre-wrap;">&lt;/article&gt;</span></p></pre>',
+      md: `\`\`\`html
+<style>
+\t.markdown-body {
+\t\tbox-sizing: border-box;
+\t\tmin-width: 200px;
+\t\tmax-width: 980px;
+\t\tmargin: 0 auto;
+\t\tpadding: 45px;
+\t}
+</style>
+\`\`\``,
+    },
+//     {
+//       html: '<details><summary><span style="white-space: pre-wrap;">Summary</span></summary><div data-lexical-collapsible-content="true"><p><span style="white-space: pre-wrap;">content</span></p></div></details>',
+//       md: `<details>
+// <summary>Summary</summary>
+// content
+// </details>`,
+//       exportMd: `#> Summary
+// content
+// #`
+//     }
   ];
 
   for (const {html, md, skipImport} of IMPORT_AND_EXPORT) {

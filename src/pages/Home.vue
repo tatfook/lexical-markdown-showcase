@@ -61,7 +61,7 @@ const onInput = () => {
     <div class="two-editor-container">
       <iframe ref="IFRAME_REF" src="./md?is_editable=false" frameborder="0" class="markdown-display"></iframe>
       <div class="markdown-editor" @input="onInput" contenteditable="true" ref="MARKDOWN_EDITOR_REF">
-        <p v-for="(md, index) in markdown.split('\n')" :key="index">
+        <p v-for="(md, index) in markdown.split('\n')" :key="md+index">
           <span v-if="md !== ''">{{ md }}</span>
           <br v-else/>
         </p>

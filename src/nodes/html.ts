@@ -127,7 +127,6 @@ export const HTML: ElementTransformer = {
       // html will be <style>img if there is a break line
       resultHtml += '\n' + children.map(child => child.getTextContent()).join('\n')
     }
-    console.log("resultHtml", resultHtml);
     const node = $createHtmlNode(resultHtml)
     parentNode.replace(node)
 

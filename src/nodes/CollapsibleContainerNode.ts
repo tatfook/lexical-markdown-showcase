@@ -329,9 +329,6 @@ export const COLLAPSIBLE_HTML: ElementTransformer = {
   replace: (parentNode: ElementNode, children: Array<LexicalNode>, match: Array<string>, isImport: boolean) => {
     const [, open] = match
     const node = $createCollapsibleContainerNode(open !== undefined && open === 'open', 1)
-    // const titleNode = $createCollapsibleTitleNode()
-    // titleNode.append($createTextNode(summary))
-    // node.append(titleNode)
     const contentNode = $createCollapsibleContentNode()
     if ($isCollapsibleTitleNode(children[0])) {
       node.append(children[0])
