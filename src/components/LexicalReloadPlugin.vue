@@ -35,18 +35,14 @@ onMounted(() => {
         && data.source === 'parent'
         && data.id === id.value
     ) {
-      const currentMarkdown = editor
-          .getEditorState()
-          .read(() => $convertToMarkdownString(props.transformers))
-      if (currentMarkdown !== data.text) {
-        const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
-        editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
-        editor.update(() => {
-          initialEditorState()
-        }, {
-          tag: 'reload'
-        })
-      }
+      console.log('reload')
+      const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
+      editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
+      editor.update(() => {
+        initialEditorState()
+      }, {
+        tag: 'reload'
+      })
     }
   })
 })
