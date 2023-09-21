@@ -2,7 +2,7 @@
 
 import {inject, onMounted, Ref} from "vue";
 import {useEditor} from "lexical-vue";
-import {$convertFromMarkdownString, $convertToMarkdownString} from "@lexical/markdown";
+import {$convertFromMarkdownString} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
 import {CLEAR_EDITOR_COMMAND} from "lexical";
 import {isMessageType, MessageType} from "@/message";
@@ -13,6 +13,7 @@ const props = defineProps<{
 
 const editor = useEditor()
 const id = inject<Ref<string>>('id')!
+
 
 onMounted(() => {
   // if there has a parent window, then send a message to parent window
@@ -35,14 +36,17 @@ onMounted(() => {
         && data.source === 'parent'
         && data.id === id.value
     ) {
-      console.log('reload')
-      const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
-      editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
-      editor.update(() => {
-        initialEditorState()
-      }, {
-        tag: 'reload'
-      })
+      const selection = window.getSelection()
+      if (selection?.rangeCount === 0) {
+        // current is not focus
+        const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
+        editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
+        editor.update(() => {
+          initialEditorState()
+        }, {
+          tag: 'reload'
+        })
+      }
     }
   })
 })
