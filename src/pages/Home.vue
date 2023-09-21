@@ -66,17 +66,13 @@ const onInput = () => {
     </div>
     <div class="other">
       <h2>View source</h2>
-      <ul>
-        <li>
-          <a
-              href="https://github.com/tatfook/lexical-markdown-showcase"
-              target="_blank"
-              rel="noreferrer"
-          >
-            GitHub
-          </a>
-        </li>
-      </ul>
+      <a
+          href="https://github.com/tatfook/lexical-markdown-showcase"
+          target="_blank"
+          rel="noreferrer"
+      >
+        GitHub
+      </a>
     </div>
   </div>
 </template>
