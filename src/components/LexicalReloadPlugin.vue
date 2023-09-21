@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {onMounted} from "vue";
+import {inject, onMounted, Ref} from "vue";
 import {useEditor} from "lexical-vue";
 import {$convertFromMarkdownString, $convertToMarkdownString} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
@@ -12,11 +12,13 @@ const props = defineProps<{
 }>()
 
 const editor = useEditor()
+const id = inject<Ref<string>>('id')!
 
 onMounted(() => {
   // if there has a parent window, then send a message to parent window
   if (window.parent !== window) {
     const message: MessageType = {
+      id: id.value,
       type: 'loaded',
       text: '',
       source: 'child'
@@ -31,6 +33,7 @@ onMounted(() => {
     }
     if ((data.type === 'init' || data.type === 'update')
         && data.source === 'parent'
+        && data.id === id.value
     ) {
       const currentMarkdown = editor
           .getEditorState()

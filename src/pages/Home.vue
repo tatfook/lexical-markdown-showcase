@@ -7,6 +7,8 @@ import {isMessageType, MessageType} from "@/message";
 const IFRAME_REF = ref<HTMLIFrameElement | null>()
 const MARKDOWN_EDITOR_REF = ref<HTMLTextAreaElement | null>()
 
+const id = 'HOME'
+
 const markdown = ref(ExampleMd)
 
 const onMessage = (event) => {
@@ -20,6 +22,7 @@ const onMessage = (event) => {
   ) {
     const postMessage = IFRAME_REF.value?.contentWindow?.postMessage
     const meesage: MessageType = {
+      id,
       type: 'init',
       text: ExampleMd,
       source: 'parent'
@@ -28,8 +31,8 @@ const onMessage = (event) => {
   }
   if (data.type === 'update'
       && data.source === 'child'
+      && data.id === id
   ) {
-    console.log("data.text", data.text);
     markdown.value = data.text
   }
 }
@@ -45,6 +48,7 @@ onUnmounted(() => {
 const onInput = () => {
   const postMessage = IFRAME_REF.value?.contentWindow?.postMessage
   const message: MessageType = {
+    id,
     type: 'update',
     text: MARKDOWN_EDITOR_REF.value!.value,
     source: 'parent'
@@ -59,7 +63,7 @@ const onInput = () => {
     <h1>Lexical Vue Markdown Demo</h1>
     <p>Note: this is an experimental build of Lexical</p>
     <div class="two-editor-container">
-      <iframe ref="IFRAME_REF" src="./md?is_editable=false" frameborder="0" class="markdown-display"></iframe>
+      <iframe ref="IFRAME_REF" :src="`./md?is_editable=false&id=${id}`" frameborder="0" class="markdown-display"></iframe>
       <textarea class="markdown-editor" @input="onInput" contenteditable="true" ref="MARKDOWN_EDITOR_REF"
                 v-model="markdown">
       </textarea>

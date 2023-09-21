@@ -26,7 +26,7 @@ import {IMAGE, ImageNode} from "@/nodes/image";
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
 import {MessageType} from "@/message";
 import {DIVIDER, DividerNode} from "@/nodes/divider";
-import {ref} from "vue";
+import {provide, ref} from "vue";
 import {useRoute} from "vue-router";
 import ToolbarPlugin from "@/components/ToolbarPlugin.vue";
 import LexicalEditablePlugin from "@/components/LexicalEditablePlugin.vue";
@@ -47,6 +47,8 @@ import {HTML, HtmlNode} from "@/nodes/html";
 const route = useRoute()
 const isDev = ref(route.query.is_dev !== 'false')
 const isEditable = ref(route.query.is_editable !== 'false')
+const id = ref(route.query.id as string)
+provide('id', id)
 
 
 const config = {
@@ -184,6 +186,7 @@ const onChange = (editorState, editor, tags: Set<string>) => {
       .getEditorState()
       .read(() => $convertToMarkdownString(T))
   const message: MessageType = {
+    id: id.value,
     type: 'update',
     text: markdown,
     source: 'child'
