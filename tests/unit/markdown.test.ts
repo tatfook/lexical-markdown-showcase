@@ -127,7 +127,8 @@ function createEditor() {
       CodeHighlightNode,
       CollapsibleContainerNode,
       CollapsibleTitleNode,
-      CollapsibleContentNode
+      CollapsibleContentNode,
+      EmojiNode,
     ],
   })
 }
@@ -141,9 +142,19 @@ describe('Markdown', () => {
     exportMd?: string;
   }>;
 
+  const URL = 'https://lexical.dev';
+
   const IMPORT_AND_EXPORT: Input = [
     {
-      html: '<pre spellcheck="false" data-highlight-language="html"><p><span style="white-space: pre-wrap;">&lt;style&gt;</span><br><span style="white-space: pre-wrap;">\t.markdown-body {</span><br><span style="white-space: pre-wrap;">\t\tbox-sizing: border-box;</span><br><span style="white-space: pre-wrap;">\t\tmin-width: 200px;</span><br><span style="white-space: pre-wrap;">\t\tmax-width: 980px;</span><br><span style="white-space: pre-wrap;">\t\tmargin: 0 auto;</span><br><span style="white-space: pre-wrap;">\t\tpadding: 45px;</span><br><span style="white-space: pre-wrap;">\t}</span><br><span style="white-space: pre-wrap;">&lt;/style&gt;</span></p></pre>',
+      html: '<pre spellcheck="false" data-highlight-language="html"><span style="white-space: pre-wrap;">&lt;style&gt;\n' +
+        '\t.markdown-body {\n' +
+        '\t\tbox-sizing: border-box;\n' +
+        '\t\tmin-width: 200px;\n' +
+        '\t\tmax-width: 980px;\n' +
+        '\t\tmargin: 0 auto;\n' +
+        '\t\tpadding: 45px;\n' +
+        '\t}\n' +
+        '&lt;/style&gt;</span></pre>',
       md: `\`\`\`html
 <style>
 \t.markdown-body {
@@ -157,14 +168,18 @@ describe('Markdown', () => {
 \`\`\``,
     },
     {
-      html: '<details><summary><span style="white-space: pre-wrap;">Summary</span></summary><div data-lexical-collapsible-content="true"><p><span style="white-space: pre-wrap;">content</span></p></div></details>',
+      html: '<details><summary><span style="white-space: pre-wrap;">Summary</span></summary><div data-lexical-collapsible-content="true"><h2><span style="white-space: pre-wrap;">Header</span></h2></div></details>',
       md: `<details>
 <summary>Summary</summary>
-content
+## Header
 </details>`,
       exportMd: `#> Summary
-content
+## Header
 #`
+    },
+    {
+      html: '<blockquote><a href="https://lexical.dev"><span style="white-space: pre-wrap;">hello</span></a><span style="white-space: pre-wrap;">  ( </span><span style="white-space: pre-wrap;"><span class="emoji-inner">👈</span></span><span style="white-space: pre-wrap;"> )</span></blockquote>',
+      md: `> [hello](${URL})  ( :point_left: )`,
     }
   ];
 

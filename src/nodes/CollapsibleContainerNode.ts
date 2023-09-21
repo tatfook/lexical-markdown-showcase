@@ -242,6 +242,7 @@ export const COLLAPSIBLE: ElementTransformer = {
     titleNode.select()
   },
   type: 'element',
+  recursivelyParse: true
 }
 
 export const COLLAPSIBLE_HTML: ElementTransformer = {
@@ -345,6 +346,7 @@ export const COLLAPSIBLE_HTML: ElementTransformer = {
     // titleNode.select()
   },
   type: 'element',
+  recursivelyParse: true
 }
 
 export const COLLAPSIBLE_TITLE_HTML: ElementTransformer = {
