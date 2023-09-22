@@ -242,19 +242,12 @@ h1 {
 }
 
 .editor-list-ol {
-    padding: 0;
-    margin: 0;
-    margin-left: 16px;
 }
 
 .editor-list-ul {
-    padding: 0;
-    margin: 0;
-    margin-left: 16px;
 }
 
 .editor-listitem {
-    margin: 8px 32px 8px 32px;
 }
 
 .editor-nested-listitem {
