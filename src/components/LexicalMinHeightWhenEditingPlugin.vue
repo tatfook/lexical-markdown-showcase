@@ -7,23 +7,33 @@ import {useEditor, useMounted} from "lexical-vue";
 const route = useRoute()
 const editor = useEditor()
 
-const editableMinHeight = ref(150)
+const isEditable = ref(route.query.is_editable !== 'false')
+
+const editableMinHeight = ref<undefined | number>(undefined)
 try {
-  editableMinHeight.value = parseInt(route.query.editable_min_height as string)
+  if (route.query.editable_min_height) {
+    editableMinHeight.value = parseInt(route.query.editable_min_height as string)
+  }
 } catch (e) {
   console.error(e)
 }
 
+
+
 useMounted(() => {
-  const rootElement = editor.getRootElement()
-  return editor.registerEditableListener((editable) => {
-    if (!rootElement) return
-    if (editable) {
-      rootElement.style.minHeight = `${editableMinHeight.value}px`
-    } else{
-      rootElement.style.minHeight = ''
+  if (editableMinHeight.value) {
+    const onEditableChanged = (editable) => {
+      const rootElement = editor.getRootElement()
+      if (!rootElement) return
+      if (editable) {
+        rootElement.style.minHeight = `${editableMinHeight.value}px`
+      } else {
+        rootElement.style.minHeight = 'unset'
+      }
     }
-  })
+    onEditableChanged(isEditable.value)
+    return editor.registerEditableListener(onEditableChanged)
+  }
 })
 
 </script>
