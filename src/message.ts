@@ -1,4 +1,5 @@
 export interface MessageType {
+  id: string
   type: string
   text: string
   source: 'parent' | 'child'

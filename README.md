@@ -20,9 +20,22 @@ is [markdown editor](http://localhost:5173/md?is_dev=false&is_editable=true&edit
 
 ```yaml
 query:
-  is_dev: type is boolean, default is true, the tree view will not be displayed when you set it to false.
-  is_editable: type is boolean, default is true, the toolbar will not be displayed when you set it to false, but will display automatically only when you edit it.
-  editable_min_height: type is number, default is 150, to display the full toolbar menu, you need to increase the editable height.
+  is_dev: 
+    type: boolean
+    default: is true
+    description: the tree view will not be displayed when you set it to false.
+  is_editable: 
+    type: boolean
+    default: is true
+    description: the toolbar will not be displayed when you set it to false, but will display automatically only when you edit it.
+  editable_min_height: 
+    type: number
+    default: is 150
+    description: to display the full toolbar menu, you need to increase the editable height.
+  id:
+    type: string
+    require: must
+    description: it will identify which editor post the message when you has multi iframe in one page
 ```
 
 # How to deploy
