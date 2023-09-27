@@ -210,7 +210,7 @@ export const COLLAPSIBLE: ElementTransformer = {
     }
     return endLineIndex - startLineIndex
   },
-  regExp: /^(\#{1,6})\s?(\>{1,2})\s(.*?)$/,
+  regExp: /^(\#{1,6})\s*(\>{1,2})\s(.*?)$/,
   closeRegExp: /^(\#{1,6})$/,
   getChildrenFromLines(lines: string[]) {
     const children: ElementNode[] = []
