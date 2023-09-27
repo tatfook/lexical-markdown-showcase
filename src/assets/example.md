@@ -7,35 +7,9 @@ Hello :grinning:
 img
 {max-width: 50% !important;}
 h1{color: #666 !important;}
-.markdown-body details {
-    border: dashed;
-    padding: 1em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    background-color: #ffd699;
-}
-
-.markdown-body details summary {
-    cursor: pointer;
-    outline: none;
-}
-
-.markdown-body details summary:active, .markdown-body details summary:focus {
-    outline: none;
-    border: none;
-}
 </style>
 
 # Details html support
-
-<details>
-<summary>Summary</summary>
-Details content
-</details>
-<details open>
-<summary>Summary when details is open</summary>
-Details content
-</details>
 
 #> Summary when use markdown
 Content

@@ -706,3 +706,21 @@ i.right-align {
 i.justify-align {
     background-image: url(images/icons/justify.svg);
 }
+
+.markdown-body details {
+    border: dashed;
+    padding: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #ffd699;
+}
+
+.markdown-body details summary {
+    cursor: pointer;
+    outline: none;
+}
+
+.markdown-body details summary:active, .markdown-body details summary:focus {
+    outline: none;
+    border: none;
+}
