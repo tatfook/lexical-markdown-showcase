@@ -36,8 +36,6 @@ import LexicalCodeHighlightPlugin from "@/components/LexicalCodeHighlightPlugin.
 import LexicalAutoAddBlockWhenArrowPlugin from "@/components/LexicalAutoAddBlockWhenArrowPlugin.vue";
 import {
   COLLAPSIBLE,
-  COLLAPSIBLE_HTML,
-  COLLAPSIBLE_TITLE_HTML,
   CollapsibleContainerNode
 } from "@/nodes/CollapsibleContainerNode";
 import {CollapsibleContentNode} from "@/nodes/CollapsibleContentNode";
@@ -147,7 +145,7 @@ const onError = (error) => {
   console.error(error)
 }
 
-const T: Transformer[] = [HTML, COLLAPSIBLE_HTML, COLLAPSIBLE_TITLE_HTML, COLLAPSIBLE, DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
+const T: Transformer[] = [HTML, COLLAPSIBLE, DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
 
 const URL_MATCHER = /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 

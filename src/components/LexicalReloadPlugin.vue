@@ -38,6 +38,7 @@ onMounted(() => {
     ) {
       const selection = window.getSelection()
       if (selection?.rangeCount === 0) {
+        console.debug("data.text", data.text);
         // current is not focus
         const initialEditorState = () => $convertFromMarkdownString(data.text, props.transformers!)
         editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
