@@ -264,3 +264,9 @@ onUnmounted(() => {
     </template>
   </div>
 </template>
+
+<style lang="scss">
+.toolbar{
+  overflow-x: auto;
+}
+</style>
