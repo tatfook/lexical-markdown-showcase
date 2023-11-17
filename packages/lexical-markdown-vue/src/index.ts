@@ -1,3 +1,3 @@
 export {
-  default as H1Component,
-} from './components/H1Component.vue'
+  default as LexicalMarkdownVue,
+} from './components/LexicalMarkdownVue.vue'

@@ -224,15 +224,12 @@ const handlerDown = (event: KeyboardEvent, editor: LexicalEditor): boolean => {
     // if ($isLastNodeImage(selection)) {
     //   return true
     // }
-    console.log("selection", selection);
     if (!$isRangeSelection(selection)) {
       return $isInsertLastWhenSelectionNull(event)
     }
 
     const node = selection.anchor.getNode()
-    console.log("node", node);
     const elementNode = node.getTopLevelElement()
-    console.log("elementNode", elementNode);
 
     const root = $getRoot()
 

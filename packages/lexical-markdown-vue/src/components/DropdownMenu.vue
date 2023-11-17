@@ -254,7 +254,6 @@ class HandleHide {
   }
 
   static onClick(e: MouseEvent) {
-    console.log(e);
     if ((e.target as
     Element
   ).

@@ -52,6 +52,10 @@ export class DividerNode extends ElementNode {
     return hr
   }
 
+  updateDOM(_prevNode: unknown, _dom: HTMLElement, _config: EditorConfig): boolean {
+    return false;
+  }
+
   exportDOM(): DOMExportOutput {
     return { element: document.createElement('hr') }
   }

@@ -10,6 +10,69 @@ importers:
 
   packages/lexical-markdown-vue:
     dependencies:
+      '@lexical/clipboard':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/code':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/dragon':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/hashtag':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/history':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/link':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/list':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/mark':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/markdown':
+        specifier: https://gh2npm-vercel.meogic.com/api/tatfook/lexical-for-keepwork/packages/lexical-markdown/npm?commit=7267b1ce7860252b4a63f3aee56d2915d72c50d9
+        version: '@gh2npm-vercel.meogic.com/api/tatfook/lexical-for-keepwork/packages/lexical-markdown/npm?commit=7267b1ce7860252b4a63f3aee56d2915d72c50d9(@lexical/clipboard@0.12.2)(@lexical/selection@0.12.2)(lexical@0.12.2)'
+      '@lexical/overflow':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/plain-text':
+        specifier: 0.12.2
+        version: 0.12.2(@lexical/clipboard@0.12.2)(@lexical/selection@0.12.2)(@lexical/utils@0.12.2)(lexical@0.12.2)
+      '@lexical/rich-text':
+        specifier: 0.12.2
+        version: 0.12.2(@lexical/clipboard@0.12.2)(@lexical/selection@0.12.2)(@lexical/utils@0.12.2)(lexical@0.12.2)
+      '@lexical/selection':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/table':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/text':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/utils':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)
+      '@lexical/yjs':
+        specifier: 0.12.2
+        version: 0.12.2(lexical@0.12.2)(yjs@13.6.7)
+      '@vueuse/core':
+        specifier: ^10.4.1
+        version: 10.4.1(vue@3.3.4)
+      emit:
+        specifier: ^0.0.2
+        version: 0.0.2
+      lexical:
+        specifier: ^0.12.2
+        version: 0.12.2
+      lexical-vue:
+        specifier: 0.7.0
+        version: 0.7.0(lexical@0.12.2)(vue@3.3.4)(yjs@13.6.7)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -1940,6 +2003,11 @@ packages:
   /electron-to-chromium@1.4.587:
     resolution: {integrity: sha512-RyJX0q/zOkAoefZhB9XHghGeATVP0Q3mwA253XD/zj2OeXc+JZB9pCaEv6R578JUYaWM9PRhye0kXvd/V1cQ3Q==}
     dev: true
+
+  /emit@0.0.2:
+    resolution: {integrity: sha512-qRCRwOWy5KfX8PO+K1i2EfzMjJU2dVkWMwd1l3FjF/JFpuWpV/vxSDqZdFQanL+Tzfre4NIQg6NTLgPOrx9Kkw==}
+    engines: {node: ~0.6.6}
+    dev: false
 
   /emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}

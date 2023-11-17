@@ -963,9 +963,6 @@ export const EMOJI: TextMatchTransformer = {
   regExp: /:([a-z_]*?):$/,
   replace: (textNode, match: RegExpMatchArray) => {
     const [, text] = match;
-    console.log("EMOJI_DATA", EMOJI_DATA);
-    console.log("text", text);
-    console.log("EMOJI_DATA[text]", EMOJI_DATA[text]);
     if (EMOJI_DATA[text]) {
       const emojiNode = $createEmojiNode(text);
       textNode.replace(emojiNode);

@@ -15,7 +15,30 @@ export default defineConfig({
       fileName: (format) => `lexical-markdown-vue.${format}.js`
     },
     rollupOptions: {
-      external: ['vue'],
+      external: [
+        'vue',
+        'lexical-vue',
+        '@vue/composition-api',
+        '@lexical/clipboard',
+        '@lexical/code',
+        '@lexical/dragon',
+        '@lexical/hashtag',
+        '@lexical/history',
+        '@lexical/link',
+        '@lexical/list',
+        '@lexical/mark',
+        '@lexical/markdown',
+        '@lexical/overflow',
+        '@lexical/plain',
+        '@lexical/rich',
+        '@lexical/selection',
+        '@lexical/table',
+        '@lexical/text',
+        '@lexical/utils',
+        '@lexical/yjs',
+        '@lexical/rich-text',
+        'lexical'
+      ],
       output: {
         globals: {
           vue: 'Vue'
