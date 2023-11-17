@@ -40,7 +40,7 @@ query:
 
 # How to deploy
 
-See [document](./DEPLOY.md)
+See [document](DEPLOY.md)
 
 
 # Thanks

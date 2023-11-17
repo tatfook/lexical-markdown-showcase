@@ -4,8 +4,9 @@ import {inject, onMounted, Ref} from "vue";
 import {useEditor} from "lexical-vue";
 import {$convertFromMarkdownString} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
-import {CLEAR_EDITOR_COMMAND} from "lexical";
+import {$getRoot, CLEAR_EDITOR_COMMAND} from "lexical";
 import {isMessageType, MessageType} from "@/message";
+import {exportNodeToJSON} from "@/lexical-util";
 
 const props = defineProps<{
   transformers: Transformer[]
@@ -45,7 +46,13 @@ onMounted(() => {
         editor.update(() => {
           initialEditorState()
         }, {
-          tag: 'reload'
+          tag: 'reload',
+          onUpdate() {
+            editor.update(() => {
+              console.log('json:', JSON.stringify(exportNodeToJSON($getRoot())))
+            })
+
+          }
         })
       }
     }
