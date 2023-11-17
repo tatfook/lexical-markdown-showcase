@@ -43,6 +43,7 @@ import {CollapsibleTitleNode} from "@/nodes/CollapsibleTitleNode";
 import {HTML, HtmlNode} from "@/nodes/html";
 
 const route = useRoute()
+
 const isDev = ref(route.query.is_dev !== 'false')
 const isEditable = ref(route.query.is_editable !== 'false')
 const id = ref(route.query.id as string)
