@@ -4,7 +4,7 @@ import {inject, onMounted, Ref, watch} from "vue";
 import {useEditor} from "lexical-vue";
 import {$convertFromMarkdownString} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
-import {$getRoot, CLEAR_EDITOR_COMMAND} from "lexical";
+import {$getRoot, $setSelection, CLEAR_EDITOR_COMMAND} from "lexical";
 import {exportNodeToJSON} from "@/lexical-util";
 
 const props = defineProps<{
@@ -19,6 +19,7 @@ watch(code, () => {
   editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
   editor.update(() => {
     initialEditorState()
+    $setSelection(null)
   }, {
     tag: 'reload'
   })

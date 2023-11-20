@@ -1,7 +1,7 @@
 {
   "name": "lexical-markdown-vue",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "types": "dist/types/index.d.ts",
   "main": "dist/lexical-markdown-vue.umd.js",
   "module": "dist/lexical-markdown-vue.es.js",
@@ -28,7 +28,6 @@
     "@lexical/utils": "0.12.2",
     "@lexical/yjs": "0.12.2",
     "@vueuse/core": "^10.4.1",
-    "emit": "^0.0.2",
     "lexical": "^0.12.2",
     "lexical-vue": "0.7.0",
     "vue": "^3.3.4"

@@ -47,12 +47,9 @@ onMounted(() => {
         && data.source === 'parent'
         && data.id === id.value
     ) {
-      const selection = window.getSelection()
-      if (selection?.rangeCount === 0) {
-        codeUpdate.value = {
-          code: data.text,
-          source: 'parent'
-        }
+      codeUpdate.value = {
+        code: data.text,
+        source: 'parent'
       }
     }
   })
