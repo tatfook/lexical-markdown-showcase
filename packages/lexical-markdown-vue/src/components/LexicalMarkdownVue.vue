@@ -32,7 +32,7 @@ import LexicalEditablePlugin from "@/components/LexicalEditablePlugin.vue";
 import LexicalUnEditableOnBlurPlugin from "@/components/LexicalUnEditableOnBlurPlugin.vue";
 import LexicalAutoAddBlockWhenArrowPlugin from "@/components/LexicalAutoAddBlockWhenArrowPlugin.vue";
 import {CLEAR_EDITOR_COMMAND, LexicalEditor} from "lexical";
-import {provide, ref, watch} from "vue";
+import {Component, provide, ref, watch} from "vue";
 import {CodeUpdate} from "@/code-update";
 
 const T: Transformer[] = [HTML, COLLAPSIBLE, DIVIDER, IMAGE, EMOJI, ...TRANSFORMERS]
@@ -71,6 +71,7 @@ const props = defineProps<{
   isEditable: boolean
   isDev: boolean
   codeUpdate: CodeUpdate
+  toolbarPlugin?: Component
 }>()
 const internalCode = ref(props.codeUpdate.code)
 watch(() => props.codeUpdate, () => {
@@ -210,7 +211,12 @@ const onError = (error) => {
 <template>
   <LexicalComposer :initialConfig="config" @error="onError">
     <div class="editor-container">
-      <ToolbarPlugin/>
+      <template v-if="toolbarPlugin">
+        <component :is="toolbarPlugin"/>
+      </template>
+      <template v-else>
+        <ToolbarPlugin/>
+      </template>
       <div class="editor-inner">
         <LexicalRichTextPlugin>
           <template #contentEditable>

@@ -2,7 +2,6 @@
 import { LexicalMarkdownVue } from 'lexical-markdown-vue'
 import {useRoute} from "vue-router";
 import {onMounted, provide, ref} from "vue";
-import {$convertFromMarkdownString, $convertToMarkdownString} from "@lexical/markdown";
 import {isMessageType, MessageType} from "@/message";
 
 const route = useRoute()
@@ -11,9 +10,7 @@ const isDev = ref(route.query.is_dev !== 'false')
 const isEditable = ref(route.query.is_editable !== 'false')
 const id = ref(route.query.id as string)
 import ExampleMd from '@/assets/example.md'
-import {$getRoot, CLEAR_EDITOR_COMMAND} from "lexical";
-import {exportNodeToJSON} from "lexical-markdown-vue/src/lexical-util";
-import {CodeUpdate} from "lexical-markdown-vue";
+import type {CodeUpdate} from "lexical-markdown-vue";
 const codeUpdate = ref<CodeUpdate>({
   code: ExampleMd,
   source: 'parent'
