@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LexicalMarkdownVue } from 'lexical-markdown-vue'
 import {useRoute} from "vue-router";
-import {onMounted, provide, ref} from "vue";
+import {Component, onMounted, provide, ref} from "vue";
 import {isMessageType, MessageType} from "@/message";
 
 const route = useRoute()
@@ -60,6 +60,7 @@ onMounted(() => {
       :is-dev="isDev"
       :is-editable="isEditable"
       :code-update="codeUpdate"
+      :isAutoAddBlockWhenArrow="false"
   />
 </template>
 

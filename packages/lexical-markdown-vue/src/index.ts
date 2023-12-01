@@ -1,6 +1,6 @@
 export {
   default as LexicalMarkdownVue,
-} from './components/LexicalMarkdownVue.vue'
+} from './LexicalMarkdownVue.vue'
 
 export type {
   CodeUpdate

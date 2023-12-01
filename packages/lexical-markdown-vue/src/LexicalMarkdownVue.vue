@@ -17,7 +17,7 @@ import {EMOJI, EmojiNode} from "@/nodes/emoji";
 import {$convertFromMarkdownString, $convertToMarkdownString, TRANSFORMERS} from "@lexical/markdown";
 import type {Transformer} from "@lexical/markdown";
 import {IMAGE, ImageNode} from "@/nodes/image";
-import ToolbarPlugin from './ToolbarPlugin.vue'
+import ToolbarPlugin from './components/ToolbarPlugin.vue'
 import LexicalOnChangePlugin from '@/components/LexicalOnChangePlugin.vue'
 import {DIVIDER, DividerNode} from "@/nodes/divider";
 import {
@@ -67,12 +67,19 @@ const MATCHERS = [
   },
 ]
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   isEditable: boolean
   isDev: boolean
   codeUpdate: CodeUpdate
   toolbarPlugin?: Component
-}>()
+  isAutoFocus?: boolean
+  isAutoLink?: boolean
+  isAutoAddBlockWhenArrow?: boolean
+}>(), {
+  isAutoFocus: true,
+  isAutoLink: true,
+  isAutoAddBlockWhenArrow: true
+})
 const internalCode = ref(props.codeUpdate.code)
 watch(() => props.codeUpdate, () => {
   if (props.codeUpdate.source === 'parent') {
@@ -228,8 +235,8 @@ const onError = (error) => {
             </div>
           </template>
         </LexicalRichTextPlugin>
-        <LexicalAutoFocusPlugin/>
-        <LexicalAutoLinkPlugin :matchers="MATCHERS"/>
+        <LexicalAutoFocusPlugin v-if="isAutoFocus"/>
+        <LexicalAutoLinkPlugin :matchers="MATCHERS" v-if="isAutoLink"/>
         <LexicalMarkdownShortcutPlugin :transformers="T"/>
         <LexicalOnChangePlugin v-on:change="onChange" :ignoreSelectionChange="true"/>
         <LexicalTreeViewPlugin
@@ -248,8 +255,7 @@ const onError = (error) => {
         <LexicalReloadPlugin :transformers="T"/>
         <LexicalEditablePlugin/>
         <LexicalUnEditableOnBlurPlugin/>
-        <LexicalAutoAddBlockWhenArrowPlugin/>
-
+        <LexicalAutoAddBlockWhenArrowPlugin v-if="isAutoAddBlockWhenArrow"/>
       </div>
     </div>
   </LexicalComposer>
