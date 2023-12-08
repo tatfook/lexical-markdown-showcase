@@ -4,7 +4,7 @@ import {
   LexicalContentEditable,
   LexicalHistoryPlugin,
   LexicalListPlugin, LexicalMarkdownShortcutPlugin, LexicalRichTextPlugin,
-  LexicalTabIndentationPlugin, LexicalTreeViewPlugin
+  LexicalTabIndentationPlugin, LexicalTreeViewPlugin, LexicalLinkPlugin
 } from "lexical-vue";
 import {HashtagNode} from "@lexical/hashtag";
 import {AutoLinkNode, LinkNode} from "@lexical/link";
@@ -249,6 +249,7 @@ const onError = (error) => {
         />
         <LexicalHistoryPlugin/>
         <LexicalListPlugin/>
+        <LexicalLinkPlugin/>
         <LexicalCheckListPlugin/>
         <LexicalCodeHighlightPlugin/>
         <LexicalTabIndentationPlugin/>
